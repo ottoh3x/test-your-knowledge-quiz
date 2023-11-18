@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { questions as qsts } from "../../utils/qsts";
 import WrongAnswersModal from "@/components/WrongAnswersModal";
 
-
 function getRandomQuestions(allQuestions: any[], count: number): any[] {
   // Shuffle the array randomly using sort with a random order
   const shuffledQuestions = allQuestions.sort(() => Math.random() - 0.5);
@@ -15,49 +14,47 @@ function getRandomQuestions(allQuestions: any[], count: number): any[] {
   return randomQuestions;
 }
 
+type QuestionsProps = {
+  question: string;
+  correctAnswer: string;
+  choices: string[];
+  selectedAnswer: string;
+};
+
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [score, setScore] = useState(0);
-  const [questions,setQuestions] =  useState([])
-  const [wrongAnswers,setWrongAnswers] = useState([])
-  const [wrongAnswer,setWrongAnswer] = useState({})
-  const [showWrongAnswers,setShowWrongAnswers] = useState(false)
+  const [questions, setQuestions] = useState<QuestionsProps[]>([]);
+  const [wrongAnswers, setWrongAnswers] = useState<any>([]);
+  const [wrongAnswer, setWrongAnswer] = useState({});
+  const [showWrongAnswers, setShowWrongAnswers] = useState(false);
   const isGameOver = questions.length <= currentIndex;
 
-
   useEffect(() => {
-    setQuestions(getRandomQuestions(qsts, 10))
-  
-    
-  }, [isGameOver])
-  
-
-
-
+    setQuestions(getRandomQuestions(qsts, 10));
+  }, [isGameOver]);
+  // @ts-ignore
   const onSubmit = (e) => {
     e.preventDefault();
 
-    questions[currentIndex].selectedAnswer = selectedAnswer
+    questions[currentIndex].selectedAnswer = selectedAnswer;
     setCurrentIndex((t) => t + 1);
     if (selectedAnswer === questions[currentIndex].correctAnswer) {
       setScore((t) => t + 1);
-
-
-    } 
-    else  { setWrongAnswers([...wrongAnswers,questions[currentIndex]]);}
+    } else {
+      setWrongAnswers([...wrongAnswers, questions[currentIndex]]);
+    }
   };
 
-console.log(wrongAnswers)
-console.log(wrongAnswer)
-  
-
+  console.log(wrongAnswers);
+  console.log(wrongAnswer);
 
   const reset = () => {
-    setScore(0)
-    setCurrentIndex(0)
-    setSelectedAnswer("")
-  }
+    setScore(0);
+    setCurrentIndex(0);
+    setSelectedAnswer("");
+  };
 
   return (
     <main className="flex min-h-screen flex-col  justify-between ">
@@ -69,18 +66,20 @@ console.log(wrongAnswer)
         {isGameOver ? (
           <div>
             <p>
-            You got {score} Correct Answers and {questions.length - score} Incorrect.
-              
-              </p>
+              You got {score} Correct Answers and {questions.length - score}{" "}
+              Incorrect.
+            </p>
             <div className="flex gap-2">
               <button
-              onClick={reset}
-              className="w-full mt-6 text-zinc-50 bg-zinc-800 hover:bg-black rounded-md py-2">
+                onClick={reset}
+                className="w-full mt-6 text-zinc-50 bg-zinc-800 hover:bg-black rounded-md py-2"
+              >
                 Try Again
               </button>
               <button
-              onClick={() => setShowWrongAnswers(true)}
-              className="w-full mt-6 text-zinc-50 bg-zinc-800 hover:bg-black rounded-md py-2">
+                onClick={() => setShowWrongAnswers(true)}
+                className="w-full mt-6 text-zinc-50 bg-zinc-800 hover:bg-black rounded-md py-2"
+              >
                 Wrong Answers
               </button>
             </div>
@@ -89,7 +88,7 @@ console.log(wrongAnswer)
           <form>
             <div className="w-[700px] max-w-xl mx-auto bg-white rounded-xl shadow-md p-6 dark:bg-zinc-800">
               <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-50">
-              {currentIndex + 1}. {questions[currentIndex].question}
+                {currentIndex + 1}. {questions[currentIndex].question}
               </h2>
               {questions[currentIndex].choices.map((choice) => (
                 <div
@@ -135,14 +134,12 @@ console.log(wrongAnswer)
           </form>
         )}
 
-
-       
-         
-    {showWrongAnswers && (
-
-          <WrongAnswersModal wrongAnswers={wrongAnswers} onClose={() => setShowWrongAnswers(false)}/>
-    )}
-      
+        {showWrongAnswers && (
+          <WrongAnswersModal
+            wrongAnswers={wrongAnswers}
+            onClose={() => setShowWrongAnswers(false)}
+          />
+        )}
       </section>
     </main>
   );
