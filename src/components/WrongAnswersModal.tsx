@@ -15,8 +15,8 @@ export default function WrongAnswersModal({
   onClose: () => void;
 }) {
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto">
-      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div className="fixed z-10  inset-0 overflow-y-auto">
+      <div className="flex  items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div aria-hidden="true" className="fixed inset-0 transition-opacity">
           <div className="absolute inset-0 bg-transparent opacity-75" />
         </div>
@@ -26,11 +26,11 @@ export default function WrongAnswersModal({
         >
           ​
         </span>
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div className="inline-block align-bottom bg-neutral-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          <div className=" px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="mt-3 text-center sm:mt-0 sm:text-left">
               <h3
-                className="text-lg leading-6 font-medium text-gray-900"
+                className="text-lg leading-6 font-medium text-gray-200"
                 id="modal-title"
               >
                 Incorrect Answers
@@ -60,6 +60,20 @@ export default function WrongAnswersModal({
                       Your answer: {answer.selectedAnswer}
                     </p>
                     <p className="text-sm text-green-500">
+                    <svg
+                        className=" h-4 w-4 inline-block align-bottom mr-1"
+                        fill="none"
+                        height="24"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
                       Correct answer: {answer.correctAnswer}
                     </p>
                   </div>
@@ -67,7 +81,7 @@ export default function WrongAnswersModal({
               </div>
             </div>
           </div>
-          <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <div className="bg-neutral-950/75 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button
               onClick={onClose}
               className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-zinc-900 text-base font-medium text-white hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500 sm:ml-3 sm:w-auto sm:text-sm"

@@ -45,10 +45,11 @@ export default function Home() {
     } else {
       setWrongAnswers([...wrongAnswers, questions[currentIndex]]);
     }
+    console.log(selectedAnswer)
+    setSelectedAnswer("")
   };
 
-  console.log(wrongAnswers);
-  console.log(wrongAnswer);
+  
 
   const reset = () => {
     setScore(0);
@@ -58,13 +59,13 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col  justify-between ">
-      <section className="w-full h-screen flex flex-col items-center justify-center px-4 md:px-6 lg:px-12 bg-zinc-100 dark:bg-zinc-900">
+      <section className="w-full h-screen flex flex-col items-center pt-5 lg:justify-center px-4 md:px-6 lg:px-12 bg-zinc-100 dark:bg-zinc-900">
         <h1 className="text-3xl font-bold text-center mb-8 text-zinc-900 dark:text-zinc-50">
           Knowledge Testing Quiz
         </h1>
 
         {isGameOver ? (
-          <div>
+          <div className="p-6 bg-neutral-950/60 rounded-lg shadow-lg">
             <p>
               You got {score} Correct Answers and {questions.length - score}{" "}
               Incorrect.
@@ -86,7 +87,7 @@ export default function Home() {
           </div>
         ) : (
           <form>
-            <div className="w-[700px] max-w-xl mx-auto bg-white rounded-xl shadow-md p-6 dark:bg-zinc-800">
+            <div className="lg:w-[700px] max-w-xl mx-auto bg-white rounded-xl shadow-md p-6 dark:bg-zinc-800/75">
               <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-50">
                 {currentIndex + 1}. {questions[currentIndex].question}
               </h2>
@@ -94,19 +95,19 @@ export default function Home() {
                 <div
                   onClick={() => setSelectedAnswer(choice)}
                   key={choice}
-                  className="space-y-2"
+                  className="space-y-2 cursor-pointer"
                 >
                   <div
                     className={`flex items-center justify-between bg-zinc-200 my-1  ${
                       selectedAnswer == choice
-                        ? "dark:bg-zinc-500"
-                        : "dark:bg-zinc-700"
-                    } w-full p-2 rounded-md text-zinc-900 dark:text-zinc-50 hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors duration-200`}
+                        ? "dark:bg-zinc-900"
+                        : "dark:bg-zinc-700/50"
+                    } w-full p-2 rounded-md text-zinc-900 dark:text-zinc-50 hover:bg-zinc-300 dark:hover:bg-zinc-900 transition-colors duration-200`}
                   >
                     <span>{choice}</span>
                     {selectedAnswer == choice && (
                       <svg
-                        className="  text-zinc-900 dark:text-zinc-50 transition-opacity duration-200"
+                        className="  text-green-600 transition-opacity duration-200"
                         fill="none"
                         height="24"
                         stroke="currentColor"
