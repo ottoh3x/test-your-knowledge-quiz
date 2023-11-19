@@ -4,22 +4,20 @@ import { useState, useEffect } from "react";
 import { questions as qsts } from "../../utils/qsts";
 import WrongAnswersModal from "@/components/WrongAnswersModal";
 
-function getRandomQuestions(allQuestions: any[], count: number): any[] {
-  // Shuffle the array randomly using sort with a random order
-  const shuffledQuestions = allQuestions.sort(() => Math.random() - 0.5);
-
-  // Get the first 'count' questions
-  const randomQuestions = shuffledQuestions.slice(0, count);
-
-  return randomQuestions;
-}
-
 type QuestionsProps = {
   question: string;
   correctAnswer: string;
   choices: string[];
-  selectedAnswer: string;
+  selectedAnswer?: string;
 };
+
+function getRandomQuestions(allQuestions: QuestionsProps[], count: number) {
+  const shuffledQuestions = allQuestions.sort(() => Math.random() - 0.5);
+
+  const randomQuestions = shuffledQuestions.slice(0, count);
+
+  return randomQuestions;
+}
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,7 +25,6 @@ export default function Home() {
   const [score, setScore] = useState(0);
   const [questions, setQuestions] = useState<QuestionsProps[]>([]);
   const [wrongAnswers, setWrongAnswers] = useState<any>([]);
-  const [wrongAnswer, setWrongAnswer] = useState({});
   const [showWrongAnswers, setShowWrongAnswers] = useState(false);
   const isGameOver = questions.length <= currentIndex;
 
@@ -45,11 +42,9 @@ export default function Home() {
     } else {
       setWrongAnswers([...wrongAnswers, questions[currentIndex]]);
     }
-    console.log(selectedAnswer)
-    setSelectedAnswer("")
+    console.log(selectedAnswer);
+    setSelectedAnswer("");
   };
-
-  
 
   const reset = () => {
     setScore(0);
@@ -59,13 +54,13 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col  justify-between ">
-      <section className="w-full h-screen flex flex-col items-center pt-5 lg:justify-center px-4 md:px-6 lg:px-12 bg-zinc-100 dark:bg-zinc-900">
+      <section className="w-full h-screen flex flex-col items-center pt-5 lg:justify-center px-4 md:px-6 lg:px-12 ">
         <h1 className="text-3xl font-bold text-center mb-8 text-zinc-900 dark:text-zinc-50">
           Knowledge Testing Quiz
         </h1>
 
         {isGameOver ? (
-          <div className="p-6 bg-neutral-950/60 rounded-lg shadow-lg">
+          <div className="p-6 bg-neutral-900 rounded-lg shadow-lg">
             <p>
               You got {score} Correct Answers and {questions.length - score}{" "}
               Incorrect.
@@ -126,7 +121,7 @@ export default function Home() {
               ))}
               <button
                 onClick={onSubmit}
-                className="w-full mt-6 text-zinc-50 bg-zinc-900 hover:bg-black rounded-md py-2"
+                className="w-full mt-6 text-zinc-50 bg-black/40 hover:bg-black rounded-md py-2"
                 type="submit"
               >
                 Next

@@ -26,7 +26,7 @@ export default function WrongAnswersModal({
         >
           ​
         </span>
-        <div className="inline-block align-bottom bg-neutral-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div className="inline-block align-bottom bg-zinc-900 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
           <div className=" px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="mt-3 text-center sm:mt-0 sm:text-left">
               <h3
@@ -81,10 +81,10 @@ export default function WrongAnswersModal({
               </div>
             </div>
           </div>
-          <div className="bg-neutral-950/75 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <div className="bg-zinc-900 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button
               onClick={onClose}
-              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-zinc-900 text-base font-medium text-white hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500 sm:ml-3 sm:w-auto sm:text-sm"
+              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-neutral-950 text-base font-medium text-white hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500 sm:ml-3 sm:w-auto sm:text-sm"
             >
               Close
             </button>
